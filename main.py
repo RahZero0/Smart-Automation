@@ -5,10 +5,10 @@ def perform_traffic_analysis(images):
     return random.randint(0, 100)
 
 image_paths = [
-    "C:\\Users\\arunb\\OneDrive\\Desktop\\Hackathon\\ht1.img",
-    "C:\\Users\\arunb\\OneDrive\\Desktop\\Hackathon\\i1.webp",
-    "C:\\Users\\arunb\\OneDrive\\Desktop\\Hackathon\\i2.jpg",
-    "C:\\Users\\arunb\\OneDrive\\Desktop\\Hackathon\\i3",
+    "images\\ht1.img",
+    "images\\i1.webp",
+    "images\\i2.jpg",
+    "images\\i3",
 ]
 
 images = [cv2.resize(cv2.imread(image_path), (400, 200)) for image_path in image_paths]
