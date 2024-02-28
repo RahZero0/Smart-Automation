@@ -13,31 +13,45 @@ image_paths = [
 ]
 images = [cv2.resize(cv2.imread(image_path), (400, 200)) for image_path in image_paths]
 
+current_image_index = 0
+start_time = time.time()
+signal_statuses = [False] * len(images)
+
 while True:
-    images = [cv2.resize(image, (400, 200)) for image in images]
+    current_time = time.time()
+    elapsed_time = current_time - start_time
 
-    top_row = np.concatenate([images[0], images[1]], axis=1)
-    bottom_row = np.concatenate([images[2], images[3]], axis=1)
-    result_frame = np.concatenate([top_row, bottom_row], axis=0)
+    for i, image in enumerate(images):
+        if i == current_image_index:
+            contours = \
+            cv2.findContours(cv2.Canny(cv2.GaussianBlur(cv2.cvtColor(image, cv2.COLOR_BGR2GRAY), (5, 5), 0), 50, 150),
+                             cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
+            traffic_count = perform_traffic_analysis(contours)
 
-    gray_images = [cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) for image in images]
+            signal_duration = max(1, traffic_count // 20)
 
-    blurred_images = [cv2.GaussianBlur(gray_image, (5, 5), 0) for gray_image in gray_images]
+            is_green_signal = i == current_image_index and elapsed_time < signal_duration
+            signal_statuses[i] = is_green_signal
 
-    edges_images = [cv2.Canny(blurred_image, 50, 150) for blurred_image in blurred_images]
+            signal_color = (0, 255, 0) if is_green_signal else (0, 0, 255)
+            cv2.circle(image, (50, 50), 30, signal_color, -1)
 
-    contours_images = [cv2.findContours(edges_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0] for edges_image in edges_images]
+        top_row = np.concatenate([images[0], images[1]], axis=1)
+        bottom_row = np.concatenate([images[2], images[3]], axis=1)
+        result_frame = np.concatenate([top_row, bottom_row], axis=0)
 
-    traffic_counts = [perform_traffic_analysis(contours) for contours in contours_images]
+        cv2.imshow('Combined Images', result_frame)
 
-    for i, count in enumerate(traffic_counts):
-        print(f'Traffic on Image {i + 1}: {count}')
+    for i, image in enumerate(images):
+        if i != current_image_index and signal_statuses[current_image_index]:
+            cv2.circle(image, (50, 50), 30, (0, 0, 255), -1)
 
-    cv2.imshow('Combined Images', result_frame)
+    if elapsed_time >= signal_duration:
+        current_image_index = (current_image_index + 1) % len(images)
+        start_time = current_time
 
-    time.sleep(10)
-
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    key = cv2.waitKey(10)
+    if key == ord('q'):
         break
 
 cv2.destroyAllWindows()
