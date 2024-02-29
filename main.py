@@ -23,15 +23,14 @@ while True:
 
     for i, image in enumerate(images):
         if i == current_image_index:
-            contours = \
-            cv2.findContours(cv2.Canny(cv2.GaussianBlur(cv2.cvtColor(image, cv2.COLOR_BGR2GRAY), (5, 5), 0), 50, 150),
+            contours =cv2.findContours(cv2.Canny(cv2.GaussianBlur(cv2.cvtColor(image, cv2.COLOR_BGR2GRAY), (5, 5), 0), 50, 150),
                              cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
             traffic_count = perform_traffic_analysis(contours)
 
-            signal_duration = max(1, traffic_count // 20)
 
             is_green_signal = i == current_image_index and elapsed_time < signal_duration
             signal_statuses[i] = is_green_signal
+            print(signal_duration)
 
             signal_color = (0, 255, 0) if is_green_signal else (0, 0, 255)
             cv2.circle(image, (50, 50), 30, signal_color, -1)
@@ -44,6 +43,7 @@ while True:
 
     for i, image in enumerate(images):
         if i != current_image_index and signal_statuses[current_image_index]:
+                
             cv2.circle(image, (50, 50), 30, (0, 0, 255), -1)
 
     if elapsed_time >= signal_duration:
