@@ -1,39 +1,56 @@
 from flask import Flask, request, jsonify
 import cv2
-import numpy as np
 
 app = Flask(__name__)
 
-def perform_traffic_analysis(contours):
+def get_contour_count(image_path):
+    # Read the image
+    image = cv2.imread(image_path)
+
+    # Resize the image if needed
+    image = cv2.resize(image, (400, 200))
+
+    # Convert image to grayscale
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    
+    # Apply Gaussian blur
+    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    
+    # Detect edges using Canny
+    edges = cv2.Canny(blurred, 50, 150)
+    
+    # Find contours
+    contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    
+    # Return number of contours
     return len(contours)
-
-@app.route('/upload', methods=['POST'])
-def upload_images():
-    images_data = request.files.getlist('images')
-    signal_durations = []
-
-    for image_data in images_data:
-        nparr = np.frombuffer(image_data.read(), np.uint8)
-        image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-
-        # Perform image processing tasks
-        contours = cv2.findContours(cv2.Canny(cv2.GaussianBlur(cv2.cvtColor(image, cv2.COLOR_BGR2GRAY), (5, 5), 0), 50, 150),cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
-        
-        traffic_count = perform_traffic_analysis(contours)
-
-        # Calculate signal duration based on traffic count
-        signal_duration = max(1, traffic_count // 20)
-        signal_durations.append(signal_duration)
-
-    # Return signal durations as JSON response
-    response = {'signal_durations': signal_durations}
-    return jsonify(response)
 
 @app.route('/hello', methods=['POST'])
 def upload():
-    # Return signal duration as JSON response
-    response = {'signal_duration': 1}
-    return jsonify(response)
+    request_data = request.get_data(as_text=True)
+
+    each_image = [i.split(": ")[1].strip('"') for i in request_data.split(",")]
+
+    contour_count = [get_contour_count(i) for i in each_image]
+
+    # Calculate total contour count
+    total_contour_count = sum(contour_count)
+
+    # Calculate ratio for each image
+    ratios = [count / total_contour_count for count in contour_count]
+
+    # Scale ratios to ensure their sum is 9000
+
+    if len(contour_count)>=4:
+        total_mins = 90000
+    elif len(contour_count)==3:
+        total_mins = 70000
+    elif len(contour_count==2):
+        total_mins = 50000
+
+    scaled_ratios = [[ index+1, (ratio * total_mins)-7000, 7000] for index, ratio in enumerate(ratios)]
+
+    return {'signal_duration': scaled_ratios}
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -1,0 +1,25 @@
+from transformers import AutoImageProcessor, DetrForObjectDetection
+import torch
+from PIL import Image
+
+path = "images\i2.jpg"
+image = Image.open(path)
+
+image_processor = AutoImageProcessor.from_pretrained("facebook/detr-resnet-50")
+model = DetrForObjectDetection.from_pretrained("facebook/detr-resnet-50")
+inputs = image_processor(images=image, return_tensors="pt")
+outputs = model(**inputs)
+
+# convert outputs (bounding boxes and class logits) to Pascal VOC format (xmin, ymin, xmax, ymax)
+target_sizes = torch.tensor([image.size[::-1]])
+results = image_processor.post_process_object_detection(outputs, threshold=0.9, target_sizes=target_sizes)[
+    0
+]
+
+a = 0
+for score, label, box in zip(results["scores"], results["labels"], results["boxes"]):
+    box = [round(i, 2) for i in box.tolist()]
+    if model.config.id2label[label.item()] in ["car", "truck", "motorcycle"]:
+        a+=1
+    
+print(f"Total number of vehicles {a}")
