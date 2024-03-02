@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traffic Lanes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .heading {
+      text-align: center;
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .lane {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        gap: 0 100px;
+    }
+
+    .lane-image {
+      width: 400px;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
+      border: 2px solid #553636;
+      border-radius: 20px;
+    }
+
+    .lane-text {
+      font-weight: bold;
+      color: #333;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="heading">Traffic Lanes</h1>
+    <div id="traffic-lanes">
+      {% for item in buffered_data %}
+      <div class="lane">
+        <img
+          src="{{ url_for('static', filename='images/' + item) }}"
+          alt="Lane {{ loop.index }}"
+          class="lane-image"
+        />
+        <p class="lane-text">Ratio Factor:
+            {{ multiple_ratio[loop.index0] }}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>

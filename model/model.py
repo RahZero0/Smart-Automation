@@ -1,9 +1,11 @@
 from transformers import AutoImageProcessor, DetrForObjectDetection
 import torch
 from PIL import Image
+import warnings
 
 path = "images\i2.jpg"
 image = Image.open(path)
+warnings.filterwarnings("ignore")
 
 image_processor = AutoImageProcessor.from_pretrained("facebook/detr-resnet-50")
 model = DetrForObjectDetection.from_pretrained("facebook/detr-resnet-50")
