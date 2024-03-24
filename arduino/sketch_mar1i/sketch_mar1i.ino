@@ -1,8 +1,8 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-const char* ssid = "Galaxy M31s789E";  // Your WiFi SSID
-const char* password = "mzgc6618";     // Your WiFi password
+const char* ssid = "Wifi _ username";  // Your WiFi SSID
+const char* password = "*********";     // Your WiFi password
 
 // Define the pin numbers for the traffic lights
 const int redPins[] = {2, 12, 19, 23};
