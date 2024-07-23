@@ -1,7 +1,7 @@
 # Smart-Automation
 Hackathon GRRR
 <div align="center">
-  <img height="150" src="https://media.tenor.com/5nT1Wf8unioAAAAi/penguin-self-care.gif"  />
+  <div class="tenor-gif-embed" data-postid="18554616" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%"><a href="https://tenor.com/view/esp32devkit-esp32-gif-18554616">Esp32devkit GIF</a>from <a href="https://tenor.com/search/esp32devkit-gifs">Esp32devkit GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 </div>
 
 ###
