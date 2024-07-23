@@ -1,7 +1,17 @@
 # Smart-Automation
 Hackathon GRRR
 <div align="center">
-  <div class="tenor-gif-embed" data-postid="18554616" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%"><a href="https://tenor.com/view/esp32devkit-esp32-gif-18554616">Esp32devkit GIF</a>from <a href="https://tenor.com/search/esp32devkit-gifs">Esp32devkit GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+  <img height="150" src="https://media1.tenor.com/m/4B8pbZNr0_YAAAAC/esp32devkit-esp32.gif"  />
+</div>
+
+###
+
+<h2 align="center">Version 2 Coming Soon....</h2>
+<h2 align="center">Major updates ..</h2>
+<h2 align="center">No longer an internal server needed...... </h2>
+<h2 align="center">And many more ..</h2>
+
+###
 </div>
 
 ###
