@@ -1,15 +1,8 @@
 # Smart-Automation
 Hackathon GRRR
 <div align="center">
-  <img height="150" src="https://media1.tenor.com/m/4B8pbZNr0_YAAAAC/esp32devkit-esp32.gif"  />
+  <img height="150" src="https://media1.tenor.com/m/4B8pbZNr0_YAAAAC/esp32devkit-esp32.gif" style="background: transparent;" alt="ESP32"/>
 </div>
-
-###
-
-<h2 align="center">Version 2 Coming Soon....</h2>
-<h2 align="center">Major updates ..</h2>
-<h2 align="center">No longer an internal server needed...... </h2>
-<h2 align="center">And many more ..</h2>
 
 ###
 </div>
