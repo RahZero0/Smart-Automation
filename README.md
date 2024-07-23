@@ -1,7 +1,7 @@
 # Smart-Automation
 Hackathon GRRR
 <div align="center">
-  <img height="150" src="https://media1.tenor.com/m/4B8pbZNr0_YAAAAC/esp32devkit-esp32.gif" style="background: transparent;" alt="ESP32"/>
+  <img height="150" src="https://media1.tenor.com/m/4B8pbZNr0_YAAAAC/esp32devkit-esp32.gif](https://media1.tenor.com/m/dc5SWT9JRFUAAAAC/funny-penguin.gif" style="background: transparent;" alt="ESP32"/>
 </div>
 
 ###
