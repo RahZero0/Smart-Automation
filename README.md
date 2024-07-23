@@ -16,7 +16,7 @@ Hackathon GRRR
 <h2 align="center">
 ESP32 and Arduino IDE
 
-Driver Installation: The <a href="https://example.com/driver" style="color: lightblue;">Driver</a> is essential for running the ESP32 script on your system.
+Driver Installation: The <a href="https://github.com/RahZero0/Smart-Automation/blob/main/CP210x_Universal_Windows_Driver.zip" style="color: lightblue;">Driver</a> is essential for running the ESP32 script on your system.
 
 Pin Voltage Information: ESP32 GPIO pins typically operate at 3.3V. Some pins may provide slightly higher voltages, which can damage sensitive components like LEDs.
 
