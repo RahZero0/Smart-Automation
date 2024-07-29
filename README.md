@@ -12,22 +12,21 @@
 
 ###
 
-<h1 align="center">
-Traffic Light Simulation and Optimization System
-
 <h2 align="center">
 ESP32 Integration: Designed and implemented a traffic light simulation system using ESP32 microcontrollers.
 </h2>
+###
 <h2 align="center">
 Vehicle Detection: Utilized CCTV images and contour line analysis for real-time vehicle detection and traffic monitoring.
 </h2>
+###
 <h2 align="center">
 Adaptive Timing: Developed an adaptive timing algorithm to adjust signal durations based on traffic volume, improving traffic flow efficiency.
 </h2>
+###
 <h2 align="center">
 Global Lock Mechanism: Created a global lock system to balance signal timings at intersections, preventing any single signal from monopolizing green light phases and ensuring equitable traffic management.
 </h2>
-</h1>
 
 ###
 
